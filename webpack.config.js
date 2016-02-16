@@ -25,8 +25,10 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new HtmlWebpackPlugin({
-      inject: 'true',
-      hash: 'true'
+      // inject: 'true',
+      hash: 'true',
+      title: 'Custom template',
+      template: '../../index.ejs'
     }),
     function() {
       this.plugin("done", function(stats) {
@@ -42,11 +44,11 @@ module.exports = {
       {   
           test: /\.js?$/, 
           exclude: /node_modules/, 
-          loaders: ['babel'] 
+          loaders: ['babel']
       },
       { 
           test: /\.css$/,
-          loader: "style!css"
+          loader: 'style!css'
       },
       {
           test: /\.scss$/,

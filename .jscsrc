@@ -1,0 +1,10 @@
+{
+    "preset": "google",
+    "validateIndentation": 4,
+    "maximumLineLength": {
+        "value": 100
+    },
+    "excludeFiles": [
+        "bower_components"
+    ]
+}
