@@ -1,5 +1,6 @@
-// import $ from 'jquery';
+import $ from 'jquery';
+import foo from './lib';
 
-var $ = require('jquery');
+console.log(foo());
 
 $('body').append('<h1>It works!</h1>');
