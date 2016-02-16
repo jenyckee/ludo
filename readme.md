@@ -20,7 +20,7 @@ define("mymodule", ["dep1", "dep2"], function(d1, d2) {
   return someExportedValue;
 });
 ```
--ES6 
+- ES6 
 
 ```
 import "jquery";
