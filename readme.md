@@ -9,7 +9,8 @@ CommonJS & AMD & (ES6 modules)
 ```require("module");
 require("../file.js");
 exports.doStuff = function() {};
-module.exports = someValue; ```
+module.exports = someValue;
+```
 
 ### Being able to do a shrinkwrap
 
