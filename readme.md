@@ -22,6 +22,12 @@ define("mymodule", ["dep1", "dep2"], function(d1, d2) {
 ```
 -ES6 
 
+```
+import "jquery";
+export function doStuff() {}
+module "localModule" {}
+```
+
 ### Being able to do a shrinkwrap
 
 Currently not possible in Bower, current proposed approach is a lockfile. See
