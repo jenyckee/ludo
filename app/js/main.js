@@ -1,3 +1,3 @@
-import _ from 'lodash';
-
-console.log(_);
+import $ from 'jquery';
+	
+$('body').html('It works!');

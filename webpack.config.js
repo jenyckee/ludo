@@ -8,22 +8,31 @@ module.exports = {
   context: path.join(__dirname, 'app', 'js'),
 
   entry: [
-    'webpack/hot/dev-server',
-    'webpack-hot-middleware/client',
+    // 'webpack/hot/dev-server',
+    // 'webpack-hot-middleware/client',
     './main'
   ],
 
   output: {
     path: path.join(__dirname, 'app', 'js'),
-    publicPath: '/js/',
-    filename: 'bundle.js'
+    publicPath: '/',
+    filename: 'bundle.[hash].js'
   },
 
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new HtmlWebpackPlugin()
+    new HtmlWebpackPlugin({
+      inject: 'body'
+    }),
+    function() {
+      this.plugin("done", function(stats) {
+        require("fs").writeFileSync(
+          path.join(__dirname, "stats.json"),
+          JSON.stringify(stats.toJson()));
+      });
+    }
   ],
 
   module: {
