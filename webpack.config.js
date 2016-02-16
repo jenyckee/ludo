@@ -1,9 +1,10 @@
 var webpack = require('webpack');
 var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   debug: true,
-  devtool: '#eval-source-map',
+  // devtool: '#eval-source-map',
   context: path.join(__dirname, 'app', 'js'),
 
   entry: [
@@ -21,7 +22,8 @@ module.exports = {
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new HtmlWebpackPlugin()
   ],
 
   module: {
