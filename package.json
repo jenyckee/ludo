@@ -6,7 +6,8 @@
   "author": "Jeroen Nyckees",
   "license": "MIT",
   "scripts": {
-    "start": "node ."
+    "start": "node .",
+    "build": "node ."
   },
   "dependencies": {
     "babel-core": "^5.8.9",

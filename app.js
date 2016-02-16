@@ -17,19 +17,19 @@ var bundler = webpack(webpackConfig);
  */
 browserSync({
     server: {
-      baseDir: 'app',
+        baseDir: 'app',
 
-      middleware: [
+        middleware: [
         webpackDevMiddleware(bundler, {
-          // IMPORTANT: dev middleware can't access config, so we should
-          // provide publicPath by ourselves
-          publicPath: webpackConfig.output.publicPath,
+            // IMPORTANT: dev middleware can't access config, so we should
+            // provide publicPath by ourselves
+            publicPath: webpackConfig.output.publicPath,
 
-          // pretty colored output
-          stats: { colors: true }
+            // pretty colored output
+            stats: {colors: true}
 
-          // for other settings see
-          // http://webpack.github.io/docs/webpack-dev-middleware.html
+            // for other settings see
+            // http://webpack.github.io/docs/webpack-dev-middleware.html
         }),
 
         // bundler should be the same as above
@@ -43,6 +43,7 @@ browserSync({
     files: [
       'app/css/*.css',
       'app/css/*.scss',
-      'app/*.html'
+      'app/*.html',
+      'app/*.ejs'
     ]
 });
