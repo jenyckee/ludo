@@ -33,8 +33,9 @@ module "localModule" {}
 Currently not possible in Bower, current proposed approach is a lockfile. See
 [https://github.com/bower/bower/issues/505]()
 
-### Serve only parts of SPAs
-Webpack is smart enough to 
+### Code Splitting
+
+Serve only parts of SPAs
 
 ### Loaders
 
