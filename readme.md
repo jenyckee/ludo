@@ -1,10 +1,9 @@
 #Browsersync - Webpack
 
-`Rationale`
-Being able to do a shrinkwrap
+## Rationale
+### Being able to do a shrinkwrap
 
-Not possible in Bower: 
+Currently not possible in Bower, current proposed approach is a lockfile. See
+[https://github.com/bower/bower/issues/505]()
 
-"It's not quite a solution, because your immediate dependencies will have non-fixed version numbers for their dependencies. So even if you lock the versions down, every time bower install is performed, you might get different versions of dependency-dependencies installed."
-
-`For SPA:`
+### Serve only parts of SPAs
