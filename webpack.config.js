@@ -9,8 +9,8 @@ module.exports = {
     // context: './',
 
     entry: [
-        'webpack/hot/dev-server',
-        'webpack-hot-middleware/client',
+        // 'webpack/hot/dev-server',
+        // 'webpack-hot-middleware/client',
         './app/js/main.js',
         './app/css/main.scss'
     ],
@@ -24,12 +24,12 @@ module.exports = {
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin(),
+        // new webpack.NoErrorsPlugin(),
         new HtmlWebpackPlugin({
             // inject: 'true',
             hash: 'true',
             title: 'Custom template',
-            template: 'index.ejs'
+            template: './app/index.ejs'
         }),
         function() {
             this.plugin('done', function(stats) {
@@ -38,7 +38,7 @@ module.exports = {
                   JSON.stringify(stats.toJson()));
             });
         }
-  ],
+    ],
 
     module: {
         loaders: [
