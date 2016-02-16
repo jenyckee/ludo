@@ -8,15 +8,16 @@ module.exports = {
   context: path.join(__dirname, 'app', 'js'),
 
   entry: [
-    // 'webpack/hot/dev-server',
-    // 'webpack-hot-middleware/client',
-    './main'
+    'webpack/hot/dev-server',
+    'webpack-hot-middleware/client',
+    './main',
+    '../css/main.scss'
   ],
 
   output: {
     path: path.join(__dirname, 'app', 'js'),
     publicPath: '/',
-    filename: 'bundle.[hash].js'
+    filename: '[name].js'
   },
 
   plugins: [
@@ -24,7 +25,8 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new HtmlWebpackPlugin({
-      inject: 'body'
+      inject: 'true',
+      hash: 'true'
     }),
     function() {
       this.plugin("done", function(stats) {
@@ -38,9 +40,9 @@ module.exports = {
   module: {
     loaders: [
       {   
-        test: /\.js?$/, 
-        exclude: /node_modules/, 
-        loaders: ['babel'] 
+          test: /\.js?$/, 
+          exclude: /node_modules/, 
+          loaders: ['babel'] 
       },
       { 
           test: /\.css$/,
