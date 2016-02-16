@@ -5,12 +5,22 @@
 ### What's out there 
 CommonJS & AMD & (ES6 modules)
 
-- CommonJS
-```require("module");
+- CommonJS (Like node.js)
+```
+require("module");
 require("../file.js");
 exports.doStuff = function() {};
 module.exports = someValue;
 ```
+
+- AMD (Like require.js)
+```
+require(["module", "../file"], function(module, file) { /* ... */ });
+define("mymodule", ["dep1", "dep2"], function(d1, d2) {
+  return someExportedValue;
+});
+```
+-ES6 
 
 ### Being able to do a shrinkwrap
 
