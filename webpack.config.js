@@ -16,8 +16,8 @@ module.exports = {
     ],
 
     output: {
-        path: path.join(__dirname, 'app', 'js'),
-        publicPath: '/',
+        path: path.join(__dirname, 'dist'),
+        // publicPath: '/',
         filename: '[name].js'
     },
 
@@ -27,6 +27,8 @@ module.exports = {
         // new webpack.NoErrorsPlugin(),
         new HtmlWebpackPlugin({
             // inject: 'true',
+            // path: './dist',
+            filename: 'index.html',
             hash: 'true',
             title: 'Custom template',
             template: './app/index.ejs'
