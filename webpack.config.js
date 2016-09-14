@@ -32,21 +32,18 @@ module.exports = {
             hash: 'true',
             title: 'Custom template',
             template: './app/index.ejs'
-        }),
-        function() {
-            this.plugin('done', function(stats) {
-                require('fs').writeFileSync(
-                  path.join(__dirname, 'stats.json'),
-                  JSON.stringify(stats.toJson()));
-            });
-        }
+        })
     ],
 
     module: {
         loaders: [
             {
-                test: /\.js?$/,exclude: /node_modules/,
-                loaders: ['babel']
+                test: /\.js?$/,
+                exclude: /node_modules/,
+                loader: 'babel',
+                query: {
+                  presets: ['es2015']
+                }
             },
             {
                 test: /\.css$/,

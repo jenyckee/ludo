@@ -1,5 +1,5 @@
 var $ = require('jquery');
-var foo = require('./lib');
+import { foo } from './lib'
 
 console.log(foo());
 
