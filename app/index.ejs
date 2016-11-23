@@ -4,11 +4,20 @@
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
 		<title><%= htmlWebpackPlugin.options.title %></title>
 	</head>
+	
 	<body>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6 text-center"></div>
-			</div>
-		</div>
+		<!-- Preloader -->
+	  <div id="loader-wrapper">
+	    <div id="loader"></div>
+	    <div class="loader-section section-left"></div>
+	    <div class="loader-section section-right"></div>
+	  </div>
+
+	  <div id="fullpage">
+	    <div class="section"><div class="maximized" id="viewer-container"></div></div>
+	  </div>
+
+	  <div class="card" id="card-side-panel-left"></div>
+	  <div class="card" id="card-side-panel-right"></div>
 	</body>
 </html>
