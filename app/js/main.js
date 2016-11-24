@@ -1,28 +1,35 @@
-import 'pixi.js'
+import * as pixi from 'pixi.js'
+import rx from 'rx'
 
+console.log(rx)
 
+var canvas = document.getElementById('canvas')
+var w = window.innerWidth,
+    h = window.innerHeight
 
-// create an new instance of a pixi stage
-var stage = new PIXI.Stage(0x97c56e, true);
-// create a renderer instance
-var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight);
+const resize = () => {
+  canvas.style.width = w + "px"
+  canvas.style.height = h + "px"
+}
 
-// add the renderer view element to the DOM
-document.body.appendChild(renderer.view);
-renderer.view.style.position = "absolute";
-renderer.view.style.top = "0px";
-renderer.view.style.left = "0px";
-renderer.backgroundColor = 0xFFFFFF;
-requestAnimationFrame( animate );
+var options = {
+  view: canvas,
+  antialias: true,
+  resolution: window.devicePixelRatio
+}
 
-// create a texture from an image path
+var renderer = new PIXI.CanvasRenderer(w, h, options)
+var stage = new PIXI.Container()
+
 var texture = PIXI.Texture.fromImage("https://openclipart.org/image/2400px/svg_to_png/213298/dothatching.png");
 
 for (var i=0; i < 10; i++)
 {
   createBunny(Math.random() * window.innerWidth, Math.random() * window.innerHeight)
 };
-
+renderer.backgroundColor = 0xFFFFFF;
+resize()
+requestAnimationFrame(animate)
 
 function createBunny(x, y)
 {
@@ -87,7 +94,6 @@ function createBunny(x, y)
 function animate() {
 
     requestAnimationFrame( animate );
-
     // just for fun, lets rotate mr rabbit a little
   //stage.interactionManager.update();
     // render the stage
