@@ -21,15 +21,41 @@ var options = {
 var renderer = new PIXI.CanvasRenderer(w, h, options)
 var stage = new PIXI.Container()
 
-var texture = PIXI.Texture.fromImage("https://openclipart.org/image/2400px/svg_to_png/213298/dothatching.png");
+var DOT_PERIMETER = 10
 
-for (var i=0; i < 10; i++)
+var graph = new PIXI.Graphics()
+graph.beginFill(0x000000)
+graph.drawRect(0,0,DOT_PERIMETER,DOT_PERIMETER)
+graph.endFill()
+
+
+
+var texture = PIXI.Texture.fromImage("https://openclipart.org/image/2400px/svg_to_png/213298/dothatching.png");
+var dots = []
+
+for (var i=0; i < window.innerWidth/DOT_PERIMETER; i+=2)
 {
-  createBunny(Math.random() * window.innerWidth, Math.random() * window.innerHeight)
-};
+  for (var j = 0; j< window.innerHeight/DOT_PERIMETER; j+=2) {
+    let img = createDot(DOT_PERIMETER*(i), DOT_PERIMETER*(j))
+    dots.push(img)
+  }
+}
+
 renderer.backgroundColor = 0xFFFFFF;
 resize()
 requestAnimationFrame(animate)
+
+
+function createDot(x,y) {
+  var img = new PIXI.Sprite(graph.generateTexture());
+  img.position.x = x;
+  img.position.y = y;
+  stage.addChild(img);
+  img.touchmove = img.mousemove = (e) => console.log(e)
+  return img
+}
+
+
 
 function createBunny(x, y)
 {
@@ -93,7 +119,11 @@ function createBunny(x, y)
 
 function animate() {
 
-    requestAnimationFrame( animate );
+    var t  = requestAnimationFrame( animate );
+    dots.forEach(dot => {
+      // dot.position.x += 0.1
+      // dot.position.y += Math.sin(t/100)
+    })
     // just for fun, lets rotate mr rabbit a little
   //stage.interactionManager.update();
     // render the stage

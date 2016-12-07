@@ -11,7 +11,7 @@ module.exports = {
     entry: [
         // 'webpack/hot/dev-server',
         // 'webpack-hot-middleware/client',
-        './app/js/main.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/three.js/r82/three.js',
         './app/css/main.scss'
     ],
 
