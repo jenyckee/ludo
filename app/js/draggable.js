@@ -1,21 +1,21 @@
-function createDot(texture, x, y)
+function Draggable(texture, x, y)
 {
-  // create our little bunny friend..
-  var bunny = new PIXI.Sprite(texture);
-  //	bunny.width = 300;
-  // enable the bunny to be interactive.. this will allow it to respond to mouse and touch events
-  bunny.interactive = true;
-  // this button mode will mean the hand cursor appears when you rollover the bunny with your mouse
-  bunny.buttonMode = true;
+  // create our little sprite friend..
+  var sprite = new PIXI.Sprite(texture);
+  //	sprite.width = 300;
+  // enable the sprite to be interactive.. this will allow it to respond to mouse and touch events
+  sprite.interactive = true;
+  // this button mode will mean the hand cursor appears when you rollover the sprite with your mouse
+  sprite.buttonMode = true;
 
-  // center the bunnys anchor point
-  bunny.anchor.x = 0.5;
-  bunny.anchor.y = 0.5;
+  // center the sprites anchor point
+  sprite.anchor.x = 0.5;
+  sprite.anchor.y = 0.5;
   // make it a bit bigger, so its easier to touch
-  bunny.scale.x = bunny.scale.y = 0.1;
+  sprite.scale.x = sprite.scale.y = 0.1;
 
   // use the mousedown and touchstart
-  bunny.mousedown = bunny.touchstart = function(data) {
+  sprite.mousedown = sprite.touchstart = function(data) {
 //		data.originalEvent.preventDefault()
     // store a refference to the data
     // The reason for this is because of multitouch
@@ -23,12 +23,12 @@ function createDot(texture, x, y)
     this.data = data.data;
     this.alpha = 0.9;
     this.dragging = true;
-    this.sx = this.data.getLocalPosition(bunny).x * bunny.scale.x;
-    this.sy = this.data.getLocalPosition(bunny).y * bunny.scale.y;
+    this.sx = this.data.getLocalPosition(sprite).x * sprite.scale.x;
+    this.sy = this.data.getLocalPosition(sprite).y * sprite.scale.y;
   };
 
   // set the events for when the mouse is released or a touch is released
-  bunny.mouseup = bunny.mouseupoutside = bunny.touchend = bunny.touchendoutside = function(data)
+  sprite.mouseup = sprite.mouseupoutside = sprite.touchend = sprite.touchendoutside = function(data)
   {
     this.alpha = 1
     this.dragging = false;
@@ -37,7 +37,7 @@ function createDot(texture, x, y)
   };
 
   // set the callbacks for when the mouse or a touch moves
-  bunny.mousemove = bunny.touchmove = function(data)
+  sprite.mousemove = sprite.touchmove = function(data)
   {
     if(this.dragging)
     {
@@ -51,11 +51,11 @@ function createDot(texture, x, y)
   }
 
   // move the sprite to its designated position
-  bunny.position.x = x;
-  bunny.position.y = y;
+  sprite.position.x = x;
+  sprite.position.y = y;
 
   // add it to the stage
-  return bunny;
+  return sprite;
 }
 
-export default createDot
+export default Draggable

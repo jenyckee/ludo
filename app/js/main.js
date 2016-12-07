@@ -31,6 +31,7 @@ var draggable = Draggable(texture, Math.random() * window.innerWidth, Math.rando
 var nonDraggable = Draggable(texture, Math.random() * window.innerWidth, Math.random() * window.innerHeight)
 // stage.addChild(draggable);
 stage.addChild(nonDraggable);
+console.log(nonDraggable)
 
 renderer.backgroundColor = 0xFFFFFF;
 resize()
@@ -82,8 +83,6 @@ store.subscribe(mapStateToStage)
 function animate() {
 
     requestAnimationFrame( animate );
-    // just for fun, lets rotate mr rabbit a little
-  //stage.interactionManager.update();
-    // render the stage
+
     renderer.render(stage);
 }
