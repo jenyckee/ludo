@@ -1,5 +1,5 @@
 import * as pixi from 'pixi.js'
-import rx from 'rx'
+import Rx from 'rx'
 import Draggable from './draggable'
 
 var canvas = document.getElementById('canvas')
@@ -28,9 +28,19 @@ var texture = renderer.generateTexture(graph);
 var draggable = Draggable(texture, Math.random() * window.innerWidth, Math.random() * window.innerHeight)
 stage.addChild(draggable);
 
+var nonDraggable = Draggable(texture, Math.random() * window.innerWidth, Math.random() * window.innerHeight)
+stage.addChild(nonDraggable);
+
 renderer.backgroundColor = 0xFFFFFF;
 resize()
 requestAnimationFrame(animate)
+
+var source = Rx.Observable.fromEvent(document, 'mousemove');
+
+var subscription = source.subscribe(function (e) {
+  nonDraggable.position.x = e.clientX
+  nonDraggable.position.y = e.clientY
+});
 
 function animate() {
 
