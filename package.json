@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "pixi.js": "^4.2.2",
+    "ramda": "^0.22.1",
     "redux": "^3.6.0",
     "redux-observable": "^0.12.2",
     "three": "^0.80.1"

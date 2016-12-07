@@ -2,6 +2,8 @@ import * as pixi from 'pixi.js'
 import Rx from 'rx'
 import Draggable from './draggable'
 
+import { createStore, applyMiddleware } from 'redux'
+
 var canvas = document.getElementById('canvas')
 var w = window.innerWidth,
     h = window.innerHeight
@@ -26,9 +28,8 @@ graph.drawRect(0,0,300,300);
 graph.endFill();
 var texture = renderer.generateTexture(graph);
 var draggable = Draggable(texture, Math.random() * window.innerWidth, Math.random() * window.innerHeight)
-stage.addChild(draggable);
-
 var nonDraggable = Draggable(texture, Math.random() * window.innerWidth, Math.random() * window.innerHeight)
+// stage.addChild(draggable);
 stage.addChild(nonDraggable);
 
 renderer.backgroundColor = 0xFFFFFF;
@@ -37,10 +38,46 @@ requestAnimationFrame(animate)
 
 var source = Rx.Observable.fromEvent(document, 'mousemove');
 
+function mouse(x,y) {
+  return {
+    type: 'MESSAGE',
+    x: x,
+    y: y
+  }
+}
+
 var subscription = source.subscribe(function (e) {
-  nonDraggable.position.x = e.clientX
-  nonDraggable.position.y = e.clientY
+  store.dispatch(mouse(e.clientX, e.clientY))
 });
+
+////////////////////////////
+
+function logger({ getState }) {
+  return (next) => (action) => {
+    let returnValue = next(action)
+
+    return returnValue
+  }
+}
+
+function mapStateToStage() {
+  let state = store.getState()
+  nonDraggable.position.x = state.x
+  nonDraggable.position.y = state.y
+}
+
+function scene(state = {}, action) {
+  switch (action.type) {
+    case 'MESSAGE':
+      return R.merge(state, { x: action.x, y: action.y })
+    default:
+      return state
+  }
+}
+
+let store = createStore(scene, {}, applyMiddleware(logger))
+
+store.subscribe(mapStateToStage)
 
 function animate() {
 

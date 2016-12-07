@@ -25,6 +25,9 @@ module.exports = {
         new webpack.optimize.OccurenceOrderPlugin(),
         // new webpack.HotModuleReplacementPlugin(),
         // new webpack.NoErrorsPlugin(),
+        new webpack.ProvidePlugin({
+          'R': 'ramda'
+        }),
         new HtmlWebpackPlugin({
             // inject: 'true',
             // path: './dist',
