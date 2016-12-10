@@ -20,6 +20,7 @@ function Draggable(texture, x, y)
     // store a refference to the data
     // The reason for this is because of multitouch
     // we want to track the movement of this particular touch
+    console.log(data.data)
     this.data = data.data;
     this.alpha = 0.9;
     this.dragging = true;

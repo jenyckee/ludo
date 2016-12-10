@@ -27,11 +27,11 @@ graph.beginFill(0xFF3300);
 graph.drawRect(0,0,300,300);
 graph.endFill();
 var texture = renderer.generateTexture(graph);
-var draggable = Draggable(texture, Math.random() * window.innerWidth, Math.random() * window.innerHeight)
-var nonDraggable = Draggable(texture, Math.random() * window.innerWidth, Math.random() * window.innerHeight)
+// var draggable = Draggable(texture, Math.random() * window.innerWidth, Math.random() * window.innerHeight)
+var nonDraggable = Draggable(texture, 100, 100)
 // stage.addChild(draggable);
 stage.addChild(nonDraggable);
-console.log(nonDraggable)
+// console.log(nonDraggable)
 
 renderer.backgroundColor = 0xFFFFFF;
 resize()
@@ -55,30 +55,29 @@ var subscription = source.subscribe(function (e) {
 
 function logger({ getState }) {
   return (next) => (action) => {
-    let returnValue = next(action)
-
-    return returnValue
+    return next(action)
   }
 }
 
 function mapStateToStage() {
   let state = store.getState()
-  nonDraggable.position.x = state.x
-  nonDraggable.position.y = state.y
+  nonDraggable.position.x = state.x * window.devicePixelRatio
+  nonDraggable.position.y = state.y * window.devicePixelRatio
 }
 
-function scene(state = {}, action) {
-  switch (action.type) {
-    case 'MESSAGE':
-      return R.merge(state, { x: action.x, y: action.y })
-    default:
-      return state
-  }
+const ACTION_HANDLERS = {
+  ['MESSAGE'] : (state, action) => R.merge(state, { x: action.x, y: action.y })
 }
 
-let store = createStore(scene, {}, applyMiddleware(logger))
+function reducer(state = {}, action) {
+  const handler = ACTION_HANDLERS[action.type]
 
-store.subscribe(mapStateToStage)
+  return handler ? handler(state, action) : state
+}
+
+let store = createStore(reducer, {}, applyMiddleware(logger))
+
+// store.subscribe(mapStateToStage)
 
 function animate() {
 
