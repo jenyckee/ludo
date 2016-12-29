@@ -19,7 +19,7 @@ function connectRTC (peerId) {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
       let state = getState().dataChannel
-      let connected = R.find(x => x===peerId)
+      let connected = R.find(x => x == peerId)
 
       if (state.peers && !connected(state.peers)) {
         state.connection.connect(peerId, {
@@ -73,7 +73,7 @@ function initRTC (apiKey, debugLevel) {
         debug: debugLevel
       }).on('connection', (c) => dispatch(connectionRTC(c)))
         .on('error', dispatch(errorRTC(error)))
-        .on('open', (id) => {
+        .on('open', id => {
           dispatch(openRTC(id))
           resolve(c)
         })
@@ -100,7 +100,7 @@ function dataRTC (data, peer) {
 function sendRTC (message, id) {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
-      eachActiveConnection(getState(), function(c) {
+      eachActiveConnection(getState().dataChannel, function(c) {
         c.send(message)
       })
     })
@@ -110,7 +110,7 @@ function sendRTC (message, id) {
 function emitRTC (message, sender) {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
-      eachActiveConnection(getState(), function(c) {
+      eachActiveConnection(getState().dataChannel, function(c) {
         c.send(message)
       })
     })
@@ -133,12 +133,12 @@ export const actions = {
 }
 
 function eachActiveConnection (state, fn) {
-  var actives = state.get('peers')
+  var actives = state.peers
   var checkedIds = {}
 
   actives.forEach(function(peerId, index) {
     if (!checkedIds[peerId]) {
-      var conns = state.get('connection').connections[peerId]
+      var conns = state.connection.connections[peerId]
       conns.forEach(fn)
     }
     checkedIds[peerId] = 1
@@ -176,22 +176,26 @@ const ACTION_HANDLERS = {
   },
   [CONNECT]: (state, action) => {
     return R.merge(state, {
-      peers: R.append(state.peers, action.peerId)
+      peers: R.append(action.peerId, state.peers)
     })
   },
   [CONNECTION]: (state, action) => {
     return R.merge(state, {
-      peers: R.append(state.peers, action.peerId)
+      peers: R.append(action.peerId, state.peers)
     })
   },
   [DATA]: (state, action) => {
     switch (action.data[0]) {
       case MIDI_MESSAGES.noteON:
-        return state.set(action.data[1], action.data[2])
+        return R.merge(state, {notes: R.merge(state.notes, {
+          [action.data[1]]: action.data[2]
+        })})
       case MIDI_MESSAGES.noteOFF:
-        return state.delete(action.data[1])
+        return R.merge(state, {notes: R.dissoc(action.data[1].toString(), state.notes)})
       case MIDI_MESSAGES.control:
-        return state.set(action.data[1], action.data[2])
+        return R.merge(state, {
+          [action.data[1]]: action.data[2]
+        })
       default:
         return state
       }
@@ -206,7 +210,8 @@ const initialState = {
   connectionId: '',
   connection: null,
   peers: [],
-  scenesrc: ""
+  scenesrc: "",
+  notes: {}
 }
 export default function reducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
