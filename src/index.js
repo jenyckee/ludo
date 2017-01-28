@@ -3,25 +3,20 @@ import thunk from 'redux-thunk'
 
 import dataChannel, { actions } from './peer'
 
-
-function getId() {
-  return window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
-}
-
 const makeRootReducer = () => {
   return combineReducers({
     dataChannel
   })
 }
 
-export function Ludo(peer, debug) {
+export function Ludo(peer) {
   const middleware = [thunk]
   let store = createStore(
     makeRootReducer(),
     {},
     applyMiddleware(...middleware))
 
-  let rtc = store.dispatch(actions.initRTC('bnon5rifq5dygb9', debug))
+  let rtc = store.dispatch(actions.initRTC('bnon5rifq5dygb9', 1))
     .then(() => store.dispatch(actions.connectRTC(peer)))
 
   return store
