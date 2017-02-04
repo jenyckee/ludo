@@ -1,5 +1,5 @@
 {
-  "name": "webpack",
+  "name": "ludojs",
   "version": "0.0.1",
   "description": "Webpack seed",
   "main": "app.js",
