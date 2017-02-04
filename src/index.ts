@@ -12,12 +12,10 @@ export default class Ludo {
   constructor() {
     const middleware = [thunk]
     let rootReducer = this.makeRootReducer();
-
-    this.store = createStore(rootReducer, {}, applyMiddleware(...middleware));
-    
     let peerId = window.location.hash.substr(1);
-
-    let rtc = this.store.dispatch(actions.initRTC('bnon5rifq5dygb9', 3))
+    
+    this.store = createStore(rootReducer, {}, applyMiddleware(...middleware));
+    this.store.dispatch(actions.initRTC('bnon5rifq5dygb9', 3))
       .then(() => this.store.dispatch(actions.connectRTC(peerId)))
   }
 
