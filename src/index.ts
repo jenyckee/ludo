@@ -1,14 +1,6 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
-
 import dataChannel, { actions } from './peer'
-
-const makeRootReducer = () => {
-  return combineReducers({
-    dataChannel
-  })
-}
-
 
 
 export default class Ludo {
@@ -19,7 +11,7 @@ export default class Ludo {
 
   constructor() {
     const middleware = [thunk]
-    let rootReducer = makeRootReducer();
+    let rootReducer = this.makeRootReducer();
 
     this.store = createStore(rootReducer, {}, applyMiddleware(...middleware));
     
@@ -29,8 +21,22 @@ export default class Ludo {
       .then(() => this.store.dispatch(actions.connectRTC(peerId)))
   }
 
-  public midi(store, message) {
+  public subscribe(f) {
+    this.store.subscribe(f);
+  }
+
+  public midi(message) {
     this.store.dispatch(actions.sendRTC(message))
+  }
+
+  public getMidi(value) {
+    return this.store.getState().dataChannel[value]
+  }
+
+  public forEachNote(f) {
+    for (var key in this.store.getState().dataChannel.notes) {
+      f(key);
+    }
   }
 
   private makeRootReducer () {
