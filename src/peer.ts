@@ -1,4 +1,5 @@
 import Peer from 'peerjs'
+import * as R from 'ramda'
 
 // ------------------------------------
 // Constants
