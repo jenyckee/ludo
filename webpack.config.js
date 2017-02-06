@@ -3,37 +3,37 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: [
-      './src/index.ts',
-    ],
+  entry: [
+    './src/index.ts',
+  ],
 
-    resolve: {
-        // Add `.ts` and `.tsx` as a resolvable extension.
-        extensions: ['.ts', '.tsx', '.js', ''] // note if using webpack 1 you'd also need a '' in the array as well
-    },
+  resolve: {
+    // Add `.ts` and `.tsx` as a resolvable extension.
+    extensions: ['.ts', '.tsx', '.js', ''] // note if using webpack 1 you'd also need a '' in the array as well
+  },
 
-    output: {
-      library: 'ludo',
-      libraryTarget: 'umd'
-    },
+  output: {
+    library: 'ludo',
+    libraryTarget: 'umd'
+  },
 
-    plugins: [
-      new webpack.ProvidePlugin({
-        'R': 'ramda'
-      })
-    ],
+  plugins: [
+    new webpack.ProvidePlugin({
+      'R': 'ramda'
+    })
+  ],
 
-    module: {
-      loaders: [
-          {
-            test: /\.js?$/,
-            exclude: /node_modules/,
-            loader: 'babel',
-            query: {
-               presets: ['es2015']
-            }
-          },
-          { test: /\.tsx?$/, loader: 'ts-loader' }
-      ]
-    }
+  module: {
+    loaders: [
+      {
+        test: /\.js?$/,
+        exclude: /node_modules/,
+        loader: 'babel',
+        query: {
+          presets: ['es2015']
+        }
+      },
+      { test: /\.tsx?$/, loader: 'ts-loader' }
+    ]
+  }
 };
