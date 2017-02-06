@@ -1,6 +1,6 @@
 {
   "name": "ludojs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "webrtc library for musical control",
   "main": "app.js",
   "author": "Jeroen Nyckees",
