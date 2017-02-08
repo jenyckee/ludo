@@ -1,5 +1,5 @@
 {
-  "name": "ludo",
+  "name": "ludojs",
   "version": "0.0.10",
   "description": "Webpack seed",
   "main": "lib/index.js",
