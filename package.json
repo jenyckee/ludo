@@ -1,17 +1,20 @@
 {
-  "name": "ludojs",
-  "version": "0.0.8",
-  "description": "webrtc library for musical control",
+
+  "name": "webpack",
+  "version": "0.0.1",
+  "description": "Webpack seed",
   "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
   "author": "Jeroen Nyckees",
   "license": "MIT",
   "files": [
     "lib"
   ],
   "scripts": {
-    "watch": "webpack src/index.ts lib/ludo.js --watch",
-    "build": "webpack src/index.ts lib/ludo.js",
-    "prepublish": "npm run build"
+    "watch": "webpack src/index.ts lib/index.js --watch",
+    "build": "webpack src/index.ts lib/index.js"
   },
   "devDependencies": {
     "babel-core": "^6.5.2",
