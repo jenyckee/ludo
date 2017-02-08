@@ -13,7 +13,7 @@ module.exports = {
   },
 
   output: {
-    filename: 'dist/index.js',
+    filename: 'lib/index.js',
     library: true,
     libraryTarget: 'commonjs2'
   },
