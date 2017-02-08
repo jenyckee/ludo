@@ -9,9 +9,6 @@
   ],
   "author": "Jeroen Nyckees",
   "license": "MIT",
-  "files": [
-    "lib"
-  ],
   "scripts": {
     "watch": "webpack src/index.ts lib/index.js --watch",
     "build": "webpack src/index.ts lib/index.js"
