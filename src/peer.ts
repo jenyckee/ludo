@@ -1,4 +1,4 @@
-import Peer from 'peerjs'
+import 'peerjs'
 import * as R from 'ramda'
 
 // ------------------------------------
@@ -72,12 +72,13 @@ function initRTC (apiKey, debugLevel) {
       let c = new Peer({
         key: apiKey,
         debug: debugLevel
-      }).on('connection', (c) => dispatch(connectionRTC(c)))
-        .on('error', dispatch(errorRTC(error)))
-        .on('open', id => {
-          dispatch(openRTC(id))
-          resolve(c)
-        })
+      })
+      c.on('connection', (c) => dispatch(connectionRTC(c)))
+      c.on('error', dispatch(errorRTC(error)))
+      c.on('open', id => {
+        dispatch(openRTC(id))
+        resolve(c)
+      })
       dispatch({ type: 'INIT', connection: c })
     })
   }
@@ -98,7 +99,7 @@ function dataRTC (data, peer) {
   }
 }
 
-function sendRTC (message, id) {
+function sendRTC (message) {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
       eachActiveConnection(getState().dataChannel, function(c) {

@@ -1,7 +1,6 @@
 {
-
-  "name": "webpack",
-  "version": "0.0.1",
+  "name": "ludo",
+  "version": "0.0.10",
   "description": "Webpack seed",
   "main": "lib/index.js",
   "files": [
@@ -11,7 +10,8 @@
   "license": "MIT",
   "scripts": {
     "watch": "webpack src/index.ts lib/index.js --watch",
-    "build": "webpack src/index.ts lib/index.js"
+    "build": "tsc src/index.ts --outDir lib",
+    "prepublish": "npm run build"
   },
   "devDependencies": {
     "babel-core": "^6.5.2",
