@@ -13,8 +13,8 @@ module.exports = {
     },
 
     output: {
-      library: 'ludo',
-      libraryTarget: 'umd'
+      library: true,
+      libraryTarget: 'commonjs2'
     },
 
     plugins: [
@@ -33,7 +33,7 @@ module.exports = {
                presets: ['es2015']
             }
           },
-          { test: /\.tsx?$/, loader: 'ts-loader' }
+          { test: /\.ts(x?)$/, loader: 'babel-loader!ts-loader' }
       ]
     }
 };

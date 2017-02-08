@@ -2,12 +2,15 @@
   "name": "webpack",
   "version": "0.0.1",
   "description": "Webpack seed",
-  "main": "app.js",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
   "author": "Jeroen Nyckees",
   "license": "MIT",
   "scripts": {
-    "watch": "webpack src/index.ts dist/ludo.js --watch",
-    "build": "webpack src/index.ts dist/ludo.js"
+    "watch": "webpack src/index.ts lib/index.js --watch",
+    "build": "webpack src/index.ts lib/index.js"
   },
   "devDependencies": {
     "babel-core": "^6.5.2",
