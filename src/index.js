@@ -4,12 +4,10 @@ import dataChannel, { actions } from './peer'
 
 
 export default class Ludo {
-  public NOTE_DOWN = 0x90;
-  public NOTE_UP   = 0x80;
-
-  private store;
-
   constructor() {
+    this.NOTE_DOWN = 0x90;
+    this.NOTE_UP   = 0x80;
+
     const middleware = [thunk]
     let rootReducer = this.makeRootReducer();
     let peerId = window.location.hash.substr(1);
@@ -19,25 +17,25 @@ export default class Ludo {
       .then(() => this.store.dispatch(actions.connectRTC(peerId)))
   }
 
-  public subscribe(f) {
+  subscribe(f) {
     this.store.subscribe(f);
   }
 
-  public midi(message) {
+  midi(message) {
     this.store.dispatch(actions.sendRTC(message))
   }
 
-  public getMidi(value) {
+  getMidi(value) {
     return this.store.getState().dataChannel[value]
   }
 
-  public forEachNote(f) {
+  forEachNote(f) {
     for (var key in this.store.getState().dataChannel.notes) {
       f(key);
     }
   }
 
-  private makeRootReducer () {
+  makeRootReducer () {
     return combineReducers({
       dataChannel
     })
