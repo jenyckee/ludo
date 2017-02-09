@@ -4,17 +4,12 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: [
-    './src/index.ts',
+    './src/index.js',
   ],
 
-  resolve: {
-    // Add `.ts` and `.tsx` as a resolvable extension.
-    extensions: ['.ts', '.tsx', '.js', ''] // note if using webpack 1 you'd also need a '' in the array as well
-  },
-
   output: {
-    library: true,
-    libraryTarget: 'commonjs'
+    library: 'ludojs',
+    libraryTarget: 'umd'
   },
 
   plugins: [
@@ -28,12 +23,8 @@ module.exports = {
         {
           test: /\.js?$/,
           exclude: /node_modules/,
-          loader: 'babel',
-          query: {
-              presets: ['es2015']
-          }
-        },
-        { test: /\.ts(x?)$/, loader: 'babel-loader!ts-loader' }
+          loaders: ['babel-loader']
+        }
     ]
   }
 };

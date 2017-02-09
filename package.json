@@ -11,7 +11,8 @@
   "scripts": {
     "clean": "rm -rf lib",
     "watch": "webpack src/index.ts lib/index.js --watch",
-    "build": "npm run build:commonjs",
+    "build": "npm run build:commonjs && npm run build:umd",
+    "build:umd": "cross-env BABEL_ENV=commonjs webpack src/index.js dist/ludo.js",
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
     "prepublish": "npm run clean && npm run build"
   },
