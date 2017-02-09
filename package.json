@@ -30,8 +30,6 @@
   },
   "dependencies": {
     "@types/es6-promise": "0.0.32",
-    "@types/peerjs": "0.0.28",
-    "@types/ramda": "0.0.3",
     "immutable": "^3.8.1",
     "peerjs": "^0.3.14",
     "pixi.js": "^4.2.2",
