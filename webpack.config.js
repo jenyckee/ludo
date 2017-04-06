@@ -8,7 +8,7 @@ module.exports = {
   ],
 
   output: {
-    library: 'ludojs',
+    library: 'Ludo',
     libraryTarget: 'umd'
   },
 
