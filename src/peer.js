@@ -157,9 +157,6 @@ const MIDI_MESSAGES = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [DATA]: (state, action) => {
-    return state
-  },
   [INIT]: (state, action) => {
     return R.merge(state, {
       connection: action.connection
@@ -187,6 +184,11 @@ const ACTION_HANDLERS = {
     })
   },
   [DATA]: (state, action) => {
+    if (action.data.code) {
+      let body = document.querySelector('body')
+      document.querySelectorAll('canvas').forEach(c => body.removeChild(c))
+      eval(action.data.code)
+    }
     switch (action.data[0]) {
       case MIDI_MESSAGES.noteON:
         return R.merge(state, {notes: R.merge(state.notes, {

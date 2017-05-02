@@ -10,7 +10,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "rm -rf lib",
-    "watch": "webpack src/index.ts lib/index.js --watch",
+    "watch": "webpack src/index.js dist/ludo.js --watch",
     "build": "npm run build:commonjs && npm run build:umd",
     "build:umd": "cross-env BABEL_ENV=commonjs webpack src/index.js dist/ludo.js",
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
